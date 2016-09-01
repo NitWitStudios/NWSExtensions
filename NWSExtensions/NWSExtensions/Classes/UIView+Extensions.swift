@@ -9,7 +9,7 @@
 import UIKit
 import Foundation
 
-extension UIView {
+public extension UIView {
     func cropAsCircle() {
         roundCornersWithRadius(self.bounds.width/2.0)
     }

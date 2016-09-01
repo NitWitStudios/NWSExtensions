@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Array
+public extension Array
 {
     mutating func removeObject<U: Equatable>(object: U) {
         var index: Int?

@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Range {
+public extension Range {
     var randomInt: Int {
         get {
             var offset = 0

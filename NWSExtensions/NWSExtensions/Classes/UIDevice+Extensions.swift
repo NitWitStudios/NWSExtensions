@@ -9,7 +9,7 @@
 import UIKit
 import Foundation
 
-extension UIDevice {
+public extension UIDevice {
     var modelName: String {
         let currentSimulatorDevice = "iPhone 6" // Set simulator device here when testing.
         var systemInfo = utsname()
