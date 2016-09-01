@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'NWSExtensions_Example' do
+  pod 'NWSExtensions', :path => '../'
+
+  target 'NWSExtensions_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end

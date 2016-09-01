@@ -1,0 +1,6 @@
+framework module NWSExtensions {
+  umbrella header "NWSExtensions-umbrella.h"
+
+  export *
+  module * { export * }
+}
