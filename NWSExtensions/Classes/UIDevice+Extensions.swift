@@ -16,7 +16,7 @@ public extension UIDevice {
         uname(&systemInfo)
         let machineMirror = Mirror(reflecting: systemInfo.machine)
         let identifier = machineMirror.children.reduce("") { identifier, element in
-            guard let value = element.value as? Int8 where value != 0 else { return identifier }
+            guard let value = element.value as? Int8 , value != 0 else { return identifier }
             return identifier + String(UnicodeScalar(UInt8(value)))
         }
         
@@ -50,26 +50,26 @@ public extension UIDevice {
     }
     
     class func iPhone6Plus() -> Bool {
-        return UIDevice.currentDevice().modelName == "iPhone 6 Plus" || UIDevice.currentDevice().modelName == "iPhone 6s Plus"
+        return UIDevice.current.modelName == "iPhone 6 Plus" || UIDevice.current.modelName == "iPhone 6s Plus"
     }
     
     class func iPhone6() -> Bool {
-        return UIDevice.currentDevice().modelName == "iPhone 6" || UIDevice.currentDevice().modelName == "iPhone 6s" || UIDevice.currentDevice().modelName == "iPod Touch 6"
+        return UIDevice.current.modelName == "iPhone 6" || UIDevice.current.modelName == "iPhone 6s" || UIDevice.current.modelName == "iPod Touch 6"
     }
     
     class func iPhone5() -> Bool {
-        return UIDevice.currentDevice().modelName == "iPhone 5" || UIDevice.currentDevice().modelName == "iPhone 5s" || UIDevice.currentDevice().modelName == "iPhone 5c" || UIDevice.currentDevice().modelName == "iPhone SE" || UIDevice.currentDevice().modelName == "iPod Touch 5"
+        return UIDevice.current.modelName == "iPhone 5" || UIDevice.current.modelName == "iPhone 5s" || UIDevice.current.modelName == "iPhone 5c" || UIDevice.current.modelName == "iPhone SE" || UIDevice.current.modelName == "iPod Touch 5"
     }
     
     class func iPhone4() -> Bool {
-        return UIDevice.currentDevice().modelName == "iPhone 4" || UIDevice.currentDevice().modelName == "iPhone 4s"
+        return UIDevice.current.modelName == "iPhone 4" || UIDevice.current.modelName == "iPhone 4s"
     }
     
     class func iPad() -> Bool {
-        return UIDevice.currentDevice().modelName == "iPad 2" || UIDevice.currentDevice().modelName == "iPad 3" || UIDevice.currentDevice().modelName == "iPad 4" || UIDevice.currentDevice().modelName == "iPad Air" || UIDevice.currentDevice().modelName == "iPad Air 2" || UIDevice.currentDevice().modelName == "iPad Mini" || UIDevice.currentDevice().modelName == "iPad Mini 2" || UIDevice.currentDevice().modelName == "iPad Mini 3" || UIDevice.currentDevice().modelName == "iPad Mini 4"
+        return UIDevice.current.modelName == "iPad 2" || UIDevice.current.modelName == "iPad 3" || UIDevice.current.modelName == "iPad 4" || UIDevice.current.modelName == "iPad Air" || UIDevice.current.modelName == "iPad Air 2" || UIDevice.current.modelName == "iPad Mini" || UIDevice.current.modelName == "iPad Mini 2" || UIDevice.current.modelName == "iPad Mini 3" || UIDevice.current.modelName == "iPad Mini 4"
     }
     
     class func iPadPro() -> Bool {
-        return UIDevice.currentDevice().modelName == "iPad Pro"
+        return UIDevice.current.modelName == "iPad Pro"
     }
 }

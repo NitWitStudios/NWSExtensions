@@ -12,12 +12,12 @@ public extension Range {
     var randomInt: Int {
         get {
             var offset = 0
-            if (startIndex as! Int) < 0 {
-                offset = abs(startIndex as! Int)
+            if (lowerBound as! Int) < 0 {
+                offset = abs(lowerBound as! Int)
             }
             
-            let mini = UInt32(startIndex as! Int + offset)
-            let maxi = UInt32(endIndex   as! Int + offset)
+            let mini = UInt32(lowerBound as! Int + offset)
+            let maxi = UInt32(upperBound   as! Int + offset)
             
             return Int(mini + arc4random_uniform(maxi - mini)) - offset
         }

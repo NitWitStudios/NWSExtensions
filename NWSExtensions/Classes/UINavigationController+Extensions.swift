@@ -10,15 +10,15 @@ import UIKit
 import Foundation
 
 public extension UINavigationController {
-    public override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return self.visibleViewController!.preferredStatusBarStyle()
+    open override var preferredStatusBarStyle : UIStatusBarStyle {
+        return self.visibleViewController!.preferredStatusBarStyle
     }
     
-    public override func shouldAutorotate() -> Bool {
-        return self.visibleViewController!.shouldAutorotate()
+    open override var shouldAutorotate : Bool {
+        return self.visibleViewController!.shouldAutorotate
     }
     
-    public override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return self.visibleViewController!.supportedInterfaceOrientations()
+    open override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
+        return self.visibleViewController!.supportedInterfaceOrientations
     }
 }
