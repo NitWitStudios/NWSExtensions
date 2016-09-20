@@ -1,5 +1,5 @@
 PODS:
-  - NWSExtensions (1.0.0)
+  - NWSExtensions (1.1.0)
 
 DEPENDENCIES:
   - NWSExtensions (from `../`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  NWSExtensions: 75c5038e60f2a8caac593880bb69b250ca54a308
+  NWSExtensions: 149491400f0b31b7144b41927831ee9985feff7c
 
 PODFILE CHECKSUM: 0280f6856a230fc17df168f483c3f6b2bd74b172
 
