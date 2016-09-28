@@ -9,7 +9,7 @@
 import UIKit
 import Foundation
 
-public extension UINavigationController {
+extension UINavigationController {
     open override var preferredStatusBarStyle : UIStatusBarStyle {
         return self.visibleViewController!.preferredStatusBarStyle
     }
