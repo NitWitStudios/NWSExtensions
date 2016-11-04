@@ -33,9 +33,93 @@ public extension UIView {
         layer.borderColor = UIColor.clear.cgColor
     }
     
-    func addSubviewWithFullConstraints(_ subview: UIView) {
-        self.addSubview(subview)
+    var borderColor: UIColor? {
+        get {
+            return UIColor(cgColor: layer.borderColor!)
+        }
+        set {
+            layer.borderColor = newValue?.cgColor
+        }
+    }
+    
+    var leftBorderWidth: CGFloat {
+        get {
+            return 0.0   // Just to satisfy property
+        }
+        set {
+            let line = UIView(frame: CGRect(x: 0.0, y: 0.0, width: newValue, height: bounds.height))
+            line.translatesAutoresizingMaskIntoConstraints = false
+            line.backgroundColor = UIColor(cgColor: layer.borderColor!)
+            self.addSubview(line)
+            
+            let views = ["line": line]
+            let metrics = ["lineWidth": newValue]
+            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "|[line(==lineWidth)]", options: [], metrics: metrics, views: views))
+            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[line]|", options: [], metrics: nil, views: views))
+        }
+    }
+    
+    var topBorderWidth: CGFloat {
+        get {
+            return 0.0   // Just to satisfy property
+        }
+        set {
+            let line = UIView(frame: CGRect(x: 0.0, y: 0.0, width: bounds.width, height: newValue))
+            line.translatesAutoresizingMaskIntoConstraints = false
+            line.backgroundColor = UIColor(cgColor: layer.borderColor!)
+            self.addSubview(line)
+            
+            let views = ["line": line]
+            let metrics = ["lineWidth": newValue]
+            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "|[line]|", options: [], metrics: nil, views: views))
+            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[line(==lineWidth)]", options: [], metrics: metrics, views: views))
+        }
+    }
+    
+    var rightBorderWidth: CGFloat {
+        get {
+            return 0.0   // Just to satisfy property
+        }
+        set {
+            let line = UIView(frame: CGRect(x: bounds.width, y: 0.0, width: newValue, height: bounds.height))
+            line.translatesAutoresizingMaskIntoConstraints = false
+            line.backgroundColor = UIColor(cgColor: layer.borderColor!)
+            self.addSubview(line)
+            
+            let views = ["line": line]
+            let metrics = ["lineWidth": newValue]
+            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "[line(==lineWidth)]|", options: [], metrics: metrics, views: views))
+            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[line]|", options: [], metrics: nil, views: views))
+        }
+    }
+    
+    var bottomBorderWidth: CGFloat {
+        get {
+            return 0.0   // Just to satisfy property
+        }
+        set {
+            let line = UIView(frame: CGRect(x: 0.0, y: bounds.height, width: bounds.width, height: newValue))
+            line.translatesAutoresizingMaskIntoConstraints = false
+            line.backgroundColor = UIColor(cgColor: layer.borderColor!)
+            self.addSubview(line)
+            
+            let views = ["line": line]
+            let metrics = ["lineWidth": newValue]
+            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "|[line]|", options: [], metrics: nil, views: views))
+            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[line(==lineWidth)]|", options: [], metrics: metrics, views: views))
+        }
+    }
+
+    func addSubviewWithFullConstraints(_ subview: UIView, belowView: UIView? = nil, aboveView: UIView? = nil) {
         subview.translatesAutoresizingMaskIntoConstraints = false
+
+        if let belowView = belowView {
+            self.insertSubview(subview, belowSubview: belowView)
+        } else if let aboveView = aboveView {
+            self.insertSubview(subview, aboveSubview: aboveView)
+        } else {
+            self.addSubview(subview)
+        }
         
         let metrics = [ String: AnyObject ]()
         let views = [ "subview" : subview ]
@@ -47,16 +131,22 @@ public extension UIView {
         self.layoutIfNeeded()
     }
     
-    func addSubviewWithCenteredConstraints(_ subview: UIView) {
-        self.addSubview(subview)
+    func addSubviewWithCenteredConstraints(_ subview: UIView, belowView: UIView? = nil, aboveView: UIView? = nil) {
         subview.translatesAutoresizingMaskIntoConstraints = false
+
+        if let belowView = belowView {
+            self.insertSubview(subview, belowSubview: belowView)
+        } else if let aboveView = aboveView {
+            self.insertSubview(subview, aboveSubview: aboveView)
+        } else {
+            self.addSubview(subview)
+        }
         
-        let xConstraint = NSLayoutConstraint(item: subview, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0)
-        let yConstraint = NSLayoutConstraint(item: subview, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: 0)
-        let leftConstraint = NSLayoutConstraint(item: subview, attribute: .left, relatedBy: .greaterThanOrEqual, toItem: self, attribute: .left, multiplier: 1.0, constant: 0)
-        let rightConstraint = NSLayoutConstraint(item: subview, attribute: .right, relatedBy: .greaterThanOrEqual, toItem: self, attribute: .right, multiplier: 1.0, constant: 0)
+        NSLayoutConstraint(item: subview, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0).isActive = true
+        NSLayoutConstraint(item: subview, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: 0).isActive = true
+        NSLayoutConstraint(item: subview, attribute: .left, relatedBy: .greaterThanOrEqual, toItem: self, attribute: .left, multiplier: 1.0, constant: 0).isActive = true
+        NSLayoutConstraint(item: subview, attribute: .right, relatedBy: .greaterThanOrEqual, toItem: self, attribute: .right, multiplier: 1.0, constant: 0).isActive = true
         
-        self.addConstraints([xConstraint, yConstraint, leftConstraint, rightConstraint])
         self.updateConstraintsIfNeeded()
         self.layoutIfNeeded()
     }
@@ -65,12 +155,11 @@ public extension UIView {
         self.addSubview(subview)
         subview.translatesAutoresizingMaskIntoConstraints = false
         
-        let topConstraint = NSLayoutConstraint(item: subview, attribute: .top, relatedBy: .greaterThanOrEqual, toItem: self, attribute: .top, multiplier: 1.0, constant: 0)
-        let bottomConstraint = NSLayoutConstraint(item: subview, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1.0, constant: 0)
-        let leftConstraint = NSLayoutConstraint(item: subview, attribute: .left, relatedBy: .equal, toItem: self, attribute: .left, multiplier: 1.0, constant: 0)
-        let rightConstraint = NSLayoutConstraint(item: subview, attribute: .right, relatedBy: .equal, toItem: self, attribute: .right, multiplier: 1.0, constant: 0)
+        NSLayoutConstraint(item: subview, attribute: .top, relatedBy: .greaterThanOrEqual, toItem: self, attribute: .top, multiplier: 1.0, constant: 0).isActive = true
+        NSLayoutConstraint(item: subview, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1.0, constant: 0).isActive = true
+        NSLayoutConstraint(item: subview, attribute: .left, relatedBy: .equal, toItem: self, attribute: .left, multiplier: 1.0, constant: 0).isActive = true
+        NSLayoutConstraint(item: subview, attribute: .right, relatedBy: .equal, toItem: self, attribute: .right, multiplier: 1.0, constant: 0).isActive = true
         
-        self.addConstraints([topConstraint,bottomConstraint,leftConstraint,rightConstraint])
         self.updateConstraintsIfNeeded()
         self.layoutIfNeeded()
     }
