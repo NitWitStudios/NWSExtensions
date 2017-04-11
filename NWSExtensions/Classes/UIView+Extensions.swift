@@ -7,9 +7,26 @@
 //
 
 import UIKit
-import Foundation
+
+private var loadingView: UIView!
+private var activityIndicatorView: UIActivityIndicatorView!
 
 public extension UIView {
+    func showLoadingView() {
+        loadingView = UIView()
+        loadingView.backgroundColor = UIColor.red
+        self.addSubviewWithFullConstraints(loadingView)
+        
+        activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+        activityIndicatorView.startAnimating()
+        loadingView.addSubviewWithCenteredConstraints(activityIndicatorView)
+    }
+    
+    func hideLoadingView() {
+        activityIndicatorView.stopAnimating()
+        loadingView.removeFromSuperview()
+    }
+    
     func cropAsCircle() {
         roundCornersWithRadius(self.bounds.width/2.0)
     }
@@ -177,4 +194,6 @@ public extension UIView {
         self.updateConstraintsIfNeeded()
         self.layoutIfNeeded()
     }
+    
+    
 }

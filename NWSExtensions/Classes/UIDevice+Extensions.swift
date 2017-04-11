@@ -10,8 +10,29 @@ import UIKit
 import Foundation
 
 public extension UIDevice {
+    
+    /// iPhone 4
+    class func isScreenSizeThreePointFiveInch() -> Bool {
+        return max(UIScreen.main.bounds.width, UIScreen.main.bounds.height) == 320.0
+    }
+    
+    /// iPhone 5
+    class func isScreenSizeFourInch() -> Bool {
+        return max(UIScreen.main.bounds.width, UIScreen.main.bounds.height) == 568.0
+    }
+    
+    /// iPhone 6/6s/7
+    class func isScreenSizeFourPointSevenInch() -> Bool {
+        return max(UIScreen.main.bounds.width, UIScreen.main.bounds.height) == 667.0
+    }
+    
+    /// iPhone 6+/6s+/7+
+    class func isScreenSizeFivePointFiveInch() -> Bool {
+        return max(UIScreen.main.bounds.width, UIScreen.main.bounds.height) == 736.0
+    }
+    
     var modelName: String {
-        let currentSimulatorDevice = "iPhone 6" // Set simulator device here when testing.
+        let currentSimulatorDevice = "iPhone 7 Plus" // Set simulator device here when testing.
         var systemInfo = utsname()
         uname(&systemInfo)
         let machineMirror = Mirror(reflecting: systemInfo.machine)
@@ -47,6 +68,14 @@ public extension UIDevice {
         case "i386", "x86_64":                          return currentSimulatorDevice
         default:                                        return identifier
         }
+    }
+    
+    class func iPhone7Plus() -> Bool {
+        return UIDevice.current.modelName == "iPhone 7 Plus" || UIDevice.current.modelName == "iPhone 7s Plus"
+    }
+    
+    class func iPhone7() -> Bool {
+        return UIDevice.current.modelName == "iPhone 7" || UIDevice.current.modelName == "iPod Touch 7"
     }
     
     class func iPhone6Plus() -> Bool {
