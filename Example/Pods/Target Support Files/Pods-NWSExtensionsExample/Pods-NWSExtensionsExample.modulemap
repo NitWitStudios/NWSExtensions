@@ -1,0 +1,6 @@
+framework module Pods_NWSExtensionsExample {
+  umbrella header "Pods-NWSExtensionsExample-umbrella.h"
+
+  export *
+  module * { export * }
+}
