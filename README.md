@@ -1,6 +1,6 @@
 # NWSExtensions
 
-[![CI Status](http://img.shields.io/travis/James Hickman/NWSExtensions.svg?style=flat)](https://travis-ci.org/James Hickman/NWSExtensions)
+[![CI Status](http://img.shields.io/travis/NitWitStudios/NWSTokenView.svg?style=flat)](https://travis-ci.org/NitWitStudios/NWSExtensions)
 [![Version](https://img.shields.io/cocoapods/v/NWSExtensions.svg?style=flat)](http://cocoapods.org/pods/NWSExtensions)
 [![License](https://img.shields.io/cocoapods/l/NWSExtensions.svg?style=flat)](http://cocoapods.org/pods/NWSExtensions)
 [![Platform](https://img.shields.io/cocoapods/p/NWSExtensions.svg?style=flat)](http://cocoapods.org/pods/NWSExtensions)
